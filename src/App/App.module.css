@@ -1,0 +1,8 @@
+img {
+  display: block;
+}
+
+.App {
+  background-color: #F1F2EE;
+  min-height: 100vh;
+}

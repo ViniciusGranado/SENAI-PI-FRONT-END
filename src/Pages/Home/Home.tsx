@@ -1,7 +1,21 @@
 import { useGetAllProductsHook } from '../../hooks/UseGetAllProductsHook';
+import { ProductCard } from '../../components/ProductCard/ProductCard';
 
 export const Home = () => {
-  const products = useGetAllProductsHook();
+  const { isLoading: isProductsLoading, products } = useGetAllProductsHook();
 
-  return <>{products.isLoading ? <p>Loading...</p> : <p>Done</p>}</>;
+  return (
+    <>
+      {/* {isProductsLoading ? (
+        <p>Loading...</p>
+      ) : (
+        products.array.forEach((_: any) => {
+          return <ProductCard />;
+        })
+      )} */}
+      {isProductsLoading ? (
+        <p>Loading...</p>
+      ) : <ProductCard />}
+    </>
+  );
 };

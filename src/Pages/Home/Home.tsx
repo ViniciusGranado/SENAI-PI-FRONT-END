@@ -1,17 +1,21 @@
-import { useGetAllProductsHook } from '../../hooks/UseGetAllProductsHook';
-import { ProductCard } from '../../components/ProductCard/ProductCard';
-import { Typography, Box } from '@mui/material';
-
+import { Box, Typography } from '@mui/material';
+import Container from '@mui/material/Container';
 import bannerBg from '../../assets/banner/banner.jpg';
+import { ProductCard } from '../../components/ProductCard/ProductCard';
+import { LoadingProductCard } from '../../components/ProductCard/LoadingProductCard';
+import { useGetAllProductsHook } from '../../hooks/UseGetAllProductsHook';
 import styles from './Home.module.css';
 
-import Container from '@mui/material/Container'
 export const Home = () => {
   const { isProductsLoading, products } = useGetAllProductsHook();
 
   const buildContent = () => {
     if (isProductsLoading) {
-      return <Typography>Loading...</Typography>;
+      return [
+        <LoadingProductCard />,
+        <LoadingProductCard />,
+        <LoadingProductCard />,
+      ];
     }
 
     if (products === undefined) {
@@ -33,13 +37,13 @@ export const Home = () => {
   return (
     <Box className={styles.Home}>
       <Container className={styles.banner}>
-        <img src={bannerBg} alt='Banner Background' />
-        <Typography variant="body1" color="initial">Our favorite products for you</Typography>
+        <img src={bannerBg} alt="Banner Background" />
+        <Typography variant="body1" color="initial">
+          Our favorite products for you
+        </Typography>
       </Container>
 
-      <Box className={styles.content}>
-        {buildContent()}
-      </Box>
+      <Box className={styles.content}>{buildContent()}</Box>
     </Box>
   );
 };

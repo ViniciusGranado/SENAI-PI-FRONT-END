@@ -1,5 +1,6 @@
 import { Header } from '../components/Header/Header';
 import { Routes, Route } from 'react-router-dom';
+import { Box } from '@mui/material';
 
 import { Home } from '../Pages/Home/Home';
 
@@ -10,10 +11,11 @@ const App = () => {
     <div className={styles.App}>
       <Header />
 
-      <Routes>
-        <Route path='/' element={<Home />} />
-      </Routes>
-      
+      <Box className={styles.content}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </Box>
     </div>
   );
 };

@@ -1,10 +1,7 @@
-import { Box, Tab, Tabs, Skeleton } from '@mui/material';
+import { Box, Tab, Tabs } from '@mui/material';
 import { SyntheticEvent, useState } from 'react';
-import { Category } from '../../../models/models';
 import { useNavigate } from 'react-router-dom';
-
 import { useGetAllCategoriesHook } from '../../../hooks/UseGetAllCategoriesHook';
-
 import styles from './Navbar.module.css';
 
 export const Navbar = () => {

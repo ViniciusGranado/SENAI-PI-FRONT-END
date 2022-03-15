@@ -7,7 +7,7 @@ import styles from './Home.module.css';
 
 import Container from '@mui/material/Container'
 export const Home = () => {
-  const { isLoading: isProductsLoading, products } = useGetAllProductsHook();
+  const { isProductsLoading, products } = useGetAllProductsHook();
 
   const buildContent = () => {
     if (isProductsLoading) {

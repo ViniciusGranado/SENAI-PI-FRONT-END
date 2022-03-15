@@ -1,36 +1,14 @@
-import { Box, Tab, Tabs } from '@mui/material';
+import { Box, Tab, Tabs, Skeleton } from '@mui/material';
 import { SyntheticEvent, useState } from 'react';
 import { Category } from '../../../models/models';
 import { useNavigate } from 'react-router-dom';
 
+import { useGetAllCategoriesHook } from '../../../hooks/UseGetAllCategoriesHook';
+
 import styles from './Navbar.module.css';
 
-interface NavbarProps {}
-
-const mockCategories: Category[]  = [
-  {
-    id: 1,
-    name: 'Smartphones',
-  },
-  {
-    id: 2,
-    name: 'Laptops',
-  },
-  {
-    id: 3,
-    name: 'TVs',
-  },
-  {
-    id: 4,
-    name: 'Sound',
-  },
-  {
-    id: 5,
-    name: 'Wearables',
-  },
-]
-
-export const Navbar: React.FC<NavbarProps> = ({}) => {
+export const Navbar = () => {
+  const { categories, isCategoriesLoading } = useGetAllCategoriesHook();
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
   const navigate = useNavigate();
 
@@ -39,16 +17,28 @@ export const Navbar: React.FC<NavbarProps> = ({}) => {
   };
 
   const getTabs = () => {
-    const tabs = mockCategories.map((category) => {
-      return <Tab label={category.name} key={category.id} onClick={() => navigate(`/${category.name}`)}/>
-    })
+    if (isCategoriesLoading) {
+      return [<Tab />];
+    }
 
-    tabs.unshift(
-      <Tab label='Home' key='0' onClick={() => navigate('/')} />
-    );
+    if (categories) {
+      const tabs = categories.map((category) => {
+        return (
+          <Tab
+            label={category.name}
+            key={category.id}
+            onClick={() => navigate(`/${category.reference}`)}
+          />
+        );
+      });
 
-    return tabs;
-  }
+      tabs.unshift(<Tab label="Home" key="0" onClick={() => navigate('/')} />);
+
+      return tabs;
+    }
+
+    return null;
+  };
 
   return (
     <Box className={styles.Navbar}>

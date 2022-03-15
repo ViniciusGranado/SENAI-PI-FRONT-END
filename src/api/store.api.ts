@@ -17,4 +17,5 @@ const request = (
 
 export const storeApi = {
   getAllProducts: request('products'),
+  getAllCategories: request('categories'),
 };

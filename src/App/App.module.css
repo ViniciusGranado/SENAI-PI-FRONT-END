@@ -8,5 +8,7 @@ img {
 }
 
 .content {
+  margin: 0 auto;
+  max-width: 75rem;
   padding: 1rem 6rem;
 }

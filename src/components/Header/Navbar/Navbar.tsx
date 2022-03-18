@@ -24,7 +24,7 @@ export const Navbar = () => {
           <Tab
             label={category.name}
             key={category.id}
-            onClick={() => navigate(`/${category.reference}`)}
+            onClick={() => navigate(`/category/${category.reference}`)}
           />
         );
       });

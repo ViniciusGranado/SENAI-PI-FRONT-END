@@ -1,0 +1,13 @@
+.Category > .content {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, 258px);
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+
+@media (max-width: 740px) {
+  .Category > .content {
+    justify-content: center;
+  }
+}

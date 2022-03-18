@@ -1,38 +1,12 @@
 import { Box, Typography } from '@mui/material';
 import Container from '@mui/material/Container';
 import bannerBg from '../../assets/banner/banner.jpg';
-import { ProductCard } from '../../components/ProductCard/ProductCard';
-import { LoadingProductCard } from '../../components/ProductCard/LoadingProductCard';
+import { ProductsGrid } from '../../components/ProductsGrid/ProductsGrid';
 import { useGetAllProductsHook } from '../../hooks/UseGetAllProductsHook';
 import styles from './Home.module.css';
 
 export const Home = () => {
   const { isProductsLoading, products } = useGetAllProductsHook();
-
-  const buildContent = () => {
-    if (isProductsLoading) {
-      return [
-        <LoadingProductCard />,
-        <LoadingProductCard />,
-        <LoadingProductCard />,
-      ];
-    }
-
-    if (products === undefined) {
-      return <Typography>Error while loading</Typography>;
-    }
-
-    return products!.map((product) => {
-      return (
-        <ProductCard
-          productName={product.name}
-          productPrice={product.price}
-          imageUrl={product.imgUrl}
-          key={product.id}
-        />
-      );
-    });
-  };
 
   return (
     <Box className={styles.Home}>
@@ -43,7 +17,9 @@ export const Home = () => {
         </Typography>
       </Container>
 
-      <Box className={styles.content}>{buildContent()}</Box>
+      <Box className={styles.content}>
+        <ProductsGrid isProductsLoading={isProductsLoading} products={products} />
+      </Box>
     </Box>
   );
 };

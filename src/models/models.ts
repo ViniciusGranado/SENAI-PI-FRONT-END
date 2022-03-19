@@ -18,3 +18,13 @@ export interface NewUserDTO {
   username: string;
   password: string;
 }
+
+export interface LoginFormDTO {
+  [username: string]: string;
+  password: string;
+}
+
+export interface ErrorObject {
+  message: string;
+  staack: string;
+}

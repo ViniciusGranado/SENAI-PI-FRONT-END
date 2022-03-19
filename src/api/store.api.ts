@@ -1,4 +1,4 @@
-import { NewUserDTO } from "../models/models";
+import { NewUserDTO, LoginFormDTO } from '../models/models';
 
 const request = (
   path: RequestInfo,
@@ -7,11 +7,11 @@ const request = (
   return async () => {
     const response = await fetch(`http://localhost:8080/${path}`, {
       ...options,
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' },
     });
 
     if (!response.ok) {
-      throw new Error('An unexpected error ocurred');
+      throw new Error(`${response.status}`);
     }
 
     return response.json();
@@ -20,8 +20,18 @@ const request = (
 
 export const storeApi = {
   getAllProducts: request('products'),
-  getAllProductsByCategory: (categoryReference: string) => request(`products/category/${categoryReference}`),
+  getAllProductsByCategory: (categoryReference: string) =>
+    request(`products/category/${categoryReference}`),
   getAllFavorites: request('products/favorites'),
   getAllCategories: request('categories'),
-  saveNewUser: (newUserDTO: NewUserDTO) => request('users', {method: 'POST' , body: JSON.stringify(newUserDTO)}),
+  saveNewUser: (newUserDTO: NewUserDTO) =>
+    request('users', {
+      method: 'POST',
+      body: JSON.stringify(newUserDTO),
+    }),
+  authenticateUser: (loginFormDTO: LoginFormDTO) =>
+    request('users/login', {
+      method: 'POST',
+      body: JSON.stringify(loginFormDTO),
+    }),
 };

@@ -9,7 +9,7 @@ import styles from './Login.module.css';
 export const Login = () => {
   const {
     authenticateUser,
-    isAuthenticated,
+    userRole,
     handleFormValues,
     isQueryLoading,
     isQuerySuccess,
@@ -33,27 +33,32 @@ export const Login = () => {
   };
 
   useEffect(() => {
-    if (isQuerySuccess) {
-      if (isAuthenticated) {
-        localStorage.setItem('isAuthenticated', 'true');
-        navigate('/');
-      } else {
-        setTsUserNotFound(false);
-        setIsPasswordIncorrect(true);
-      }
+    if (isQuerySuccess && userRole) {
+      localStorage.setItem('isAuthenticated', 'true');
+      localStorage.setItem('userRole', userRole);
+      navigate('/');
     }
-  }, [isAuthenticated, isQuerySuccess, navigate]);
+  }, [userRole, isQuerySuccess, navigate]);
 
   useEffect(() => {
-    if (isQueryError) {
-      if (errorStatus?.message === '404') {
-        setTsUserNotFound(true);
-        setIsPasswordIncorrect(false);
-      } else {
-        handleOpenAlert();
+    if (isQueryError && errorStatus) {
+      switch (errorStatus.message) {
+        case '404':
+          setTsUserNotFound(true);
+          setIsPasswordIncorrect(false);
+          break;
+
+        case '401':
+          setTsUserNotFound(false);
+          setIsPasswordIncorrect(true);
+          break;
+
+        default:
+          handleOpenAlert();
+          break;
       }
     }
-  }, [isQueryError, errorStatus, isAuthenticated]);
+  }, [isQueryError, errorStatus, userRole]);
 
   return (
     <Box className={styles.Login} component="form">
@@ -97,7 +102,7 @@ export const Login = () => {
         isOpen={isAlertOpen}
         onClose={handleCloseAlert}
         title="Error"
-        message="There where an unexpected error while login in. Please try again"
+        message="There was an unexpected error while logging in. Please try again"
         severity="error"
       />
     </Box>

@@ -13,12 +13,12 @@ export const UseAuthenticateUserHook = () => {
 
   const { 
     mutate: authenticateUser,
-    data: isAuthenticated,
+    data: userRole,
     isLoading: isQueryLoading,
     isSuccess: isQuerySuccess,
     isError: isQueryError,
     error: errorStatus,
-   } = useMutation<boolean, ErrorObject>(storeApi.authenticateUser(loginFormDTO));
+   } = useMutation<string, ErrorObject>(storeApi.authenticateUser(loginFormDTO));
 
   const handleFormValues = (
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -35,7 +35,7 @@ export const UseAuthenticateUserHook = () => {
   
   return {
     authenticateUser,
-    isAuthenticated,
+    userRole,
     handleFormValues,
     isQueryLoading,
     isQuerySuccess,

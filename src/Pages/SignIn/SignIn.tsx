@@ -1,31 +1,50 @@
-import { Box, TextField, FormControl, Button } from '@mui/material';
-
+import { Box, Button, TextField } from '@mui/material';
+import React from 'react';
+import { UseSaveNewUserHook } from '../../hooks/UseSaveNewUserHook';
 import styles from './SignIn.module.css';
 
 export const SignIn = () => {
+  const { saveNewUser, handleFormValues } = UseSaveNewUserHook();
+
   return (
     <Box className={styles.SignIn} component="form">
-      <FormControl fullWidth>
-        <TextField label="First Name" />
-      </FormControl>
+      <TextField
+        label="Name"
+        name="name"
+        fullWidth
+        onChange={(event) => handleFormValues(event)}
+      />
 
-      <FormControl fullWidth>
-        <TextField label="Last Name" />
-      </FormControl>
+      <TextField
+        label="E-mail"
+        name="email"
+        type="email"
+        fullWidth
+        onChange={(event) => handleFormValues(event)}
+      />
 
-      <FormControl fullWidth>
-        <TextField label="E-mail" type='email' />
-      </FormControl>
+      <TextField
+        label="Username"
+        name="username"
+        fullWidth
+        onChange={(event) => handleFormValues(event)}
+      />
 
-      <FormControl fullWidth>
-        <TextField label="Username" />
-      </FormControl>
+      <TextField
+        label="Password"
+        name="password"
+        type="password"
+        fullWidth
+        onChange={(event) => handleFormValues(event)}
+      />
 
-      <FormControl fullWidth>
-        <TextField label="Password" type="password" />
-      </FormControl>
-
-      <Button variant='contained' sx={{padding: '0.625rem 5rem'}}>Sign-in</Button>
+      <Button
+        variant="contained"
+        sx={{ padding: '0.625rem 5rem' }}
+        onClick={() => saveNewUser()}
+      >
+        Sign-in
+      </Button>
     </Box>
   );
 };

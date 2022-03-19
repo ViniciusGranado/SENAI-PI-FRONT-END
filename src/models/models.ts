@@ -12,3 +12,9 @@ export interface Category {
   name: string;
   reference: string;
 }
+export interface NewUserDTO {
+  [name: string]: string;
+  email: string;
+  username: string;
+  password: string;
+}

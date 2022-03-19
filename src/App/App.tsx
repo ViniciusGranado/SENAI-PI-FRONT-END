@@ -4,8 +4,9 @@ import { Box } from '@mui/material';
 
 import { Home } from '../Pages/Home/Home';
 import { Category } from '../Pages/Category/Category';
-import { AllProducts } from '../Pages/AllProducts/AllProducts'
-import { Login } from '../Pages/Login/Login'
+import { AllProducts } from '../Pages/AllProducts/AllProducts';
+import { Login } from '../Pages/Login/Login';
+import { SignIn } from '../Pages/SignIn/SignIn';
 
 import styles from './App.module.css';
 
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="/category/:reference" element={<Category />} /> 
           <Route path="/all-products" element={<AllProducts />} /> 
           <Route path="/login" element={<Login />} />
+          <Route path="/sign-in" element={<SignIn />} />
         </Routes>
       </Box>
     </div>

@@ -14,7 +14,7 @@ export const Header = () => {
         <LogoHorizontal />
 
         <Box className={styles['buttons-container']}>
-          <Button variant="outlined">Sign-in</Button>
+          <Button variant="outlined" onClick={() => navigate('/sign-in')}>Sign-in</Button>
           <Button variant="contained" onClick={() => navigate('/login')}>Login</Button>
         </Box>
       </Box>

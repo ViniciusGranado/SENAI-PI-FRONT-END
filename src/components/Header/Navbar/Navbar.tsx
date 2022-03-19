@@ -30,6 +30,7 @@ export const Navbar = () => {
       });
 
       tabs.unshift(<Tab label="Home" key="0" onClick={() => navigate('/')} />);
+      tabs.push(<Tab label="All Products" key={tabs.length} onClick={() => navigate('/all-products')} />);
 
       return tabs;
     }

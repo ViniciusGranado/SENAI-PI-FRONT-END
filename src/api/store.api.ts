@@ -18,5 +18,6 @@ const request = (
 export const storeApi = {
   getAllProducts: request('products'),
   getAllProductsByCategory: (categoryReference: string) => request(`products/category/${categoryReference}`),
+  getAllFavorites: request('products/favorites'),
   getAllCategories: request('categories'),
 };

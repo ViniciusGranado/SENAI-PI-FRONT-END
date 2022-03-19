@@ -1,0 +1,8 @@
+.Login {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 3rem auto;
+  max-width: 30rem;
+}

@@ -1,10 +1,65 @@
-import { Box, Button, CircularProgress, TextField } from '@mui/material';
-import React from 'react';
+import {
+  AlertColor,
+  Box,
+  Button,
+  CircularProgress,
+  TextField
+} from '@mui/material';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AlertDialog } from '../../components/AlertDialog/AlertDialog';
 import { UseSaveNewUserHook } from '../../hooks/UseSaveNewUserHook';
 import styles from './SignIn.module.css';
 
+
 export const SignIn = () => {
-  const { saveNewUser, handleFormValues, isSaveLoading } = UseSaveNewUserHook();
+  const {
+    saveNewUser,
+    handleFormValues,
+    isSaveLoading,
+    isSaveSuccess,
+    isSaveError,
+  } = UseSaveNewUserHook();
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const [alertSeverity, setAlertSeverity] = useState<AlertColor | undefined>(
+    undefined
+  );
+  const [alertTitle, setAlertTitle] = useState<string | undefined>(undefined);
+  const [alertMessage, setAlertMessage] = useState<string | undefined>(
+    undefined
+  );
+
+  const navigate = useNavigate();
+
+  const handleOpenAlert = () => {
+    setIsAlertOpen(true);
+  };
+
+  const handleCloseAlert = () => {
+    setIsAlertOpen(false);
+
+    if (isSaveSuccess) {
+      navigate('/');
+    }
+  };
+
+  useEffect(() => {
+    if (isSaveSuccess) {
+      setAlertSeverity('success');
+      setAlertTitle('The user was created!');
+      setAlertMessage('Please login to see your cart');
+      handleOpenAlert();
+    }
+  }, [isSaveSuccess]);
+
+  useEffect(() => {
+    if (isSaveError) {
+      setAlertSeverity('error');
+      setAlertTitle('Error');
+      setAlertMessage('The user was not created. Please try again.');
+      handleOpenAlert();
+    }
+  }, [isSaveError]);
 
   return (
     <Box className={styles.SignIn} component="form">
@@ -51,6 +106,13 @@ export const SignIn = () => {
           </Button>
         </>
       )}
+      <AlertDialog
+        isOpen={isAlertOpen}
+        onClose={handleCloseAlert}
+        title={alertTitle}
+        message={alertMessage}
+        severity={alertSeverity}
+      />
     </Box>
   );
 };

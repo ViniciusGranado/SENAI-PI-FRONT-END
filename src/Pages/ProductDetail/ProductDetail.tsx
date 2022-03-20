@@ -1,17 +1,25 @@
 import { AddShoppingCart } from '@mui/icons-material';
-import { Button, CircularProgress, Typography } from '@mui/material';
+import { CircularProgress, Typography } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import { Box } from '@mui/system';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { UseGetProductById } from '../../hooks/UseGetProductById';
+import { UseInsertCartItemHook } from '../../hooks/UseInsertCartItemHook';
 import styles from './ProductDetail.module.css';
 
 export const ProductDetail = () => {
-  const { id } = useParams();
+  const { id: productId } = useParams();
+  const clientId = localStorage.getItem('clientId');
+  const id = useParams();
+  const navigate = useNavigate();
+
+  const { insertProduct, isInsertProductSuccess, isInsertProductLoading } = UseInsertCartItemHook();
+
   const [enabledQuery, setEnabledQuery] = useState(false);
 
   const { product, isProductLoading } = UseGetProductById(
-    id ?? '',
+    productId ?? '',
     enabledQuery
   );
 
@@ -21,9 +29,24 @@ export const ProductDetail = () => {
     }
   }, [id]);
 
+  useEffect(() => {
+    if (isInsertProductSuccess) {
+      navigate('/cart');
+    }
+  }, [isInsertProductSuccess, navigate]);
+
+  const onAddToCart = () => {
+    if (clientId !== null && productId) {
+      insertProduct({
+        clientId: Number.parseInt(clientId),
+        productId: Number.parseInt(productId),
+      });
+    }
+  };
+
   return (
     <Box className={styles.ProductDetail}>
-      {isProductLoading || !product ? (
+      {isProductLoading || !product || !clientId ? (
         <CircularProgress />
       ) : (
         <>
@@ -49,13 +72,15 @@ export const ProductDetail = () => {
               </Typography>
             </Box>
 
-            <Button
+            <LoadingButton
               variant="contained"
               startIcon={<AddShoppingCart />}
               className={styles['add-to-cart-button']}
+              onClick={onAddToCart}
+              loading={isInsertProductLoading}
             >
               Add To Cart
-            </Button>
+            </LoadingButton>
           </Box>
         </>
       )}

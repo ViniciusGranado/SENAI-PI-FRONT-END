@@ -117,11 +117,9 @@ export const Cart = () => {
                   <TableCell />
                   <TableCell />
                   <TableCell align="right">Total Value: ${getTotalValue()}</TableCell>
+                  <TableCell />
                   <TableCell align="right">
                     <Button variant="contained">Finish</Button>
-                  </TableCell>
-                  <TableCell align="right">
-                    <Button variant="contained" onClick={() => console.log(productsValues)}>Show state</Button>
                   </TableCell>
                 </TableRow>
               </TableBody>

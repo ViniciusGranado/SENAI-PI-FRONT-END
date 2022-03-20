@@ -1,4 +1,4 @@
-import { NewUserDTO, LoginFormDTO } from '../models/models';
+import { NewUserDTO, LoginFormDTO, CartItemData } from '../models/models';
 
 const request = (
   path: RequestInfo,
@@ -36,4 +36,9 @@ export const storeApi = {
       body: JSON.stringify(loginFormDTO),
     }),
   getCartByClientId: (clientId: string) => request(`cart/${clientId}`),
+  insertCartItem: (cartItemData: CartItemData) =>
+    request('cart-item', {
+      method: 'POST',
+      body: JSON.stringify(cartItemData),
+    }),
 };

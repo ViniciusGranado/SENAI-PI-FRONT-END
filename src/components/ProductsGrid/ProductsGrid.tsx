@@ -12,33 +12,40 @@ export const ProductsGrid: React.FC<ProductsGridProps> = ({
   isProductsLoading,
   products,
 }) => {
-  if (isProductsLoading) {
+  const clientId = localStorage.getItem('clientId');
+
+  const getContent = () => {
+    if (isProductsLoading) {
+      return (
+        <>
+          <LoadingProductCard />
+          <LoadingProductCard />
+          <LoadingProductCard />
+        </>
+      );
+    }
+
+    if (products === undefined || clientId === null) {
+      return <Typography>Error while loading</Typography>;
+    }
+
     return (
       <>
-        <LoadingProductCard />
-        <LoadingProductCard />
-        <LoadingProductCard />
+        {products!.map((product) => {
+          return (
+            <ProductCard
+              productName={product.name}
+              productPrice={product.price}
+              imageUrl={product.imgUrl}
+              productId={product.id}
+              key={product.id}
+              clientId={Number.parseInt(clientId)}
+            />
+          );
+        })}
       </>
     );
-  }
+  };
 
-  if (products === undefined) {
-    return <Typography>Error while loading</Typography>;
-  }
-
-  return (
-    <>
-      {products!.map((product) => {
-        return (
-          <ProductCard
-            productName={product.name}
-            productPrice={product.price}
-            imageUrl={product.imgUrl}
-            productId={product.id}
-            key={product.id}
-          />
-        );
-      })}
-    </>
-  );
+  return <>{getContent()};</>;
 };

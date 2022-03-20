@@ -12,6 +12,11 @@ export interface Cart {
   items: {product: Product}[];
 }
 
+export interface CartItemData {
+  productId: number;
+  clientId: number;
+}
+
 export interface Category {
   id: number;
   name: string;

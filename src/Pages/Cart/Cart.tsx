@@ -14,8 +14,8 @@ import {
 import { useEffect, useState } from 'react';
 import { UseGetCartByClientIdHook } from '../../hooks/UseGetCartByClientIdHook';
 import { UseDeleteCartItemHook } from '../../hooks/UseDeleteCartItemHook';
+import { UsesCreateCartHook } from '../../hooks/UseCreateCartHook';
 import styles from './Cart.module.css';
-import { LoadingButton } from '@mui/lab';
 
 interface ProductsValues {
   [id: string]: number;
@@ -31,8 +31,10 @@ export const Cart = () => {
     enabledQuery
   );
 
-  const { deleteProduct, isDeleteProductSuccess, isDeleteProductLoading } =
-    UseDeleteCartItemHook();
+  const { deleteProduct, isDeleteProductLoading } = UseDeleteCartItemHook();
+  const { createCart, orderData, isCreateDatatLoading } = UsesCreateCartHook(
+    clientId ?? ''
+  );
 
   useEffect(() => {
     if (clientId) {
@@ -85,6 +87,10 @@ export const Cart = () => {
     return undefined;
   };
 
+  const handleFinishOrder = () => {
+    createCart();
+  };
+
   return (
     <Box className={styles.Cart}>
       {isCartLoading || !cart ? (
@@ -133,7 +139,11 @@ export const Cart = () => {
                           sx={{ marginRight: '1rem' }}
                         />
                       ) : (
-                        <IconButton aria-label="delete" size="large" onClick={() => handleDeleteProduct(item.product.id)}>
+                        <IconButton
+                          aria-label="delete"
+                          size="large"
+                          onClick={() => handleDeleteProduct(item.product.id)}
+                        >
                           <Delete
                             fontSize="inherit"
                             sx={{ color: '#e91e63' }}
@@ -151,7 +161,9 @@ export const Cart = () => {
                   </TableCell>
                   <TableCell />
                   <TableCell align="right">
-                    <Button variant="contained">Finish</Button>
+                    <Button variant="contained" onClick={handleFinishOrder}>
+                      Finish
+                    </Button>
                   </TableCell>
                 </TableRow>
               </TableBody>

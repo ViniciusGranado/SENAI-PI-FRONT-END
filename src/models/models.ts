@@ -12,6 +12,12 @@ export interface Cart {
   items: {product: Product}[];
 }
 
+export interface Order {
+  id: number;
+  items: Product;
+  total: number;
+}
+
 export interface CartItemData {
   productId: number;
   clientId: number;

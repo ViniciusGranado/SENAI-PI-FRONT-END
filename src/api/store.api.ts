@@ -46,4 +46,6 @@ export const storeApi = {
       method: 'DELETE',
       body: JSON.stringify(cartItemData),
     }),
+  createCart: (clientId: string) =>
+    request(`orders/${clientId}`, { method: 'POST' }),
 };

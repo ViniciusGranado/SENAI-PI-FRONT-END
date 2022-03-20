@@ -9,7 +9,7 @@ import styles from './Login.module.css';
 export const Login = () => {
   const {
     authenticateUser,
-    userRole,
+    userInfo,
     handleFormValues,
     isQueryLoading,
     isQuerySuccess,
@@ -33,12 +33,13 @@ export const Login = () => {
   };
 
   useEffect(() => {
-    if (isQuerySuccess && userRole) {
+    if (isQuerySuccess && userInfo) {
       localStorage.setItem('isAuthenticated', 'true');
-      localStorage.setItem('userRole', userRole);
+      localStorage.setItem('userId', `${userInfo.id}`);
+      localStorage.setItem('userRole', userInfo.role);
       navigate('/');
     }
-  }, [userRole, isQuerySuccess, navigate]);
+  }, [isQuerySuccess, navigate, userInfo]);
 
   useEffect(() => {
     if (isQueryError && errorStatus) {
@@ -58,7 +59,7 @@ export const Login = () => {
           break;
       }
     }
-  }, [isQueryError, errorStatus, userRole]);
+  }, [isQueryError, errorStatus]);
 
   return (
     <Box className={styles.Login} component="form">

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 import { storeApi } from '../api/store.api';
-import { LoginFormDTO, ErrorObject } from '../models/models';
+import { LoginFormDTO, ErrorObject, UserInfo } from '../models/models';
 
 const initialLoginFormDTO: LoginFormDTO = {
   username: '',
@@ -13,12 +13,12 @@ export const UseAuthenticateUserHook = () => {
 
   const { 
     mutate: authenticateUser,
-    data: userRole,
+    data: userInfo,
     isLoading: isQueryLoading,
     isSuccess: isQuerySuccess,
     isError: isQueryError,
     error: errorStatus,
-   } = useMutation<string, ErrorObject>(storeApi.authenticateUser(loginFormDTO));
+   } = useMutation<UserInfo, ErrorObject>(storeApi.authenticateUser(loginFormDTO));
 
   const handleFormValues = (
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -35,7 +35,7 @@ export const UseAuthenticateUserHook = () => {
   
   return {
     authenticateUser,
-    userRole,
+    userInfo,
     handleFormValues,
     isQueryLoading,
     isQuerySuccess,

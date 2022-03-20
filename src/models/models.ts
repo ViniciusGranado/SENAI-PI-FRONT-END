@@ -24,6 +24,11 @@ export interface LoginFormDTO {
   password: string;
 }
 
+export interface UserInfo {
+  id: number;
+  role: string;
+}
+
 export interface ErrorObject {
   message: string;
   staack: string;

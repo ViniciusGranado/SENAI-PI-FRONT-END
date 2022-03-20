@@ -1,0 +1,18 @@
+.ProductDetail {
+  display: flex;
+  justify-content: center;
+  margin: 3rem auto;
+}
+
+.ProductDetail > .image-container,
+.ProductDetail > .info-container {
+  flex: 1;
+}
+
+.ProductDetail > .info-container {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: right;
+}

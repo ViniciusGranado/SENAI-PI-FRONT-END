@@ -34,6 +34,7 @@ export const ProductsGrid: React.FC<ProductsGridProps> = ({
             productName={product.name}
             productPrice={product.price}
             imageUrl={product.imgUrl}
+            productId={product.id}
             key={product.id}
           />
         );

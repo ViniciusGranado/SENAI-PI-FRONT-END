@@ -1,13 +1,17 @@
 import { AddShoppingCart } from '@mui/icons-material';
 import { Box, Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
+
+import styles from './ProductCard.module.css';
 
 interface ProductCardProps {
   productName: string;
   productPrice: number;
-  imageUrl: string
+  imageUrl: string;
+  productId: number;
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({productName, productPrice, imageUrl}) => {
+export const ProductCard: React.FC<ProductCardProps> = ({productName, productPrice, imageUrl, productId}) => {
   return (
     <Card sx={{ maxWidth: 258 }}>
       <Box sx={{
@@ -18,15 +22,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({productName, productPri
         alignItems: 'center',
         padding: '0.5rem',
       }}>
-        <CardMedia
-          component="img"
-          image={imageUrl}
-          alt={productName}
-        />
+        <Link to={`/product/${productId}`} >
+          <CardMedia
+            component="img"
+            image={imageUrl}
+            alt={productName}
+          />
+        </Link>
       </Box>
       <CardContent sx={{textAlign: 'right'}}>
-        <Typography variant="body1">{productName}</Typography>
-        <Typography variant="h4">{`R$${productPrice}`}</Typography>
+        <Link to={`/product/${productId}`} className={styles['product-name']}>
+          <Typography variant="body1">{productName}</Typography>
+        </Link>
+        <Typography variant="h4">{`R$${productPrice.toFixed(2)}`}</Typography>
       </CardContent>
       <CardActions disableSpacing sx={{display: 'flex', justifyContent: 'flex-end'}}>
         <Button startIcon={< AddShoppingCart />} variant='contained'>

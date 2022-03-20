@@ -41,4 +41,9 @@ export const storeApi = {
       method: 'POST',
       body: JSON.stringify(cartItemData),
     }),
+  deleteCartItem: (cartItemData: CartItemData) =>
+    request('cart-item', {
+      method: 'DELETE',
+      body: JSON.stringify(cartItemData),
+    }),
 };

@@ -13,7 +13,9 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { UseGetCartByClientIdHook } from '../../hooks/UseGetCartByClientIdHook';
+import { UseDeleteCartItemHook } from '../../hooks/UseDeleteCartItemHook';
 import styles from './Cart.module.css';
+import { LoadingButton } from '@mui/lab';
 
 interface ProductsValues {
   [id: string]: number;
@@ -28,6 +30,9 @@ export const Cart = () => {
     clientId ?? '',
     enabledQuery
   );
+
+  const { deleteProduct, isDeleteProductSuccess, isDeleteProductLoading } =
+    UseDeleteCartItemHook();
 
   useEffect(() => {
     if (clientId) {
@@ -57,17 +62,28 @@ export const Cart = () => {
 
       return copyState;
     });
-  }
+  };
+
+  const handleDeleteProduct = (productId: number) => {
+    if (clientId !== null) {
+      deleteProduct({
+        productId: productId,
+        clientId: Number.parseInt(clientId),
+      });
+    }
+  };
 
   const getTotalValue = () => {
     if (cart) {
-      return cart.items.reduce((acc, cur) => {
-        return acc + (cur.product.price * productsValues[`${cur.product.id}`]);
-      }, 0).toFixed(2)
+      return cart.items
+        .reduce((acc, cur) => {
+          return acc + cur.product.price * productsValues[`${cur.product.id}`];
+        }, 0)
+        .toFixed(2);
     }
 
     return undefined;
-  }
+  };
 
   return (
     <Box className={styles.Cart}>
@@ -92,7 +108,11 @@ export const Cart = () => {
                     </TableCell>
 
                     <TableCell align="right">
-                      ${(item.product.price * productsValues[`${item.product.id}`]).toFixed(2)}
+                      $
+                      {(
+                        item.product.price *
+                        productsValues[`${item.product.id}`]
+                      ).toFixed(2)}
                     </TableCell>
 
                     <TableCell align="right">
@@ -107,16 +127,28 @@ export const Cart = () => {
                     </TableCell>
 
                     <TableCell align="right">
-                      <IconButton aria-label="delete" size="large">
-                        <Delete fontSize="inherit" sx={{ color: '#e91e63' }} />
-                      </IconButton>
+                      {isDeleteProductLoading ? (
+                        <CircularProgress
+                          size={'1rem'}
+                          sx={{ marginRight: '1rem' }}
+                        />
+                      ) : (
+                        <IconButton aria-label="delete" size="large" onClick={() => handleDeleteProduct(item.product.id)}>
+                          <Delete
+                            fontSize="inherit"
+                            sx={{ color: '#e91e63' }}
+                          />
+                        </IconButton>
+                      )}
                     </TableCell>
                   </TableRow>
                 ))}
                 <TableRow>
                   <TableCell />
                   <TableCell />
-                  <TableCell align="right">Total Value: ${getTotalValue()}</TableCell>
+                  <TableCell align="right">
+                    Total Value: ${getTotalValue()}
+                  </TableCell>
                   <TableCell />
                   <TableCell align="right">
                     <Button variant="contained">Finish</Button>

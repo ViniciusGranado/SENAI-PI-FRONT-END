@@ -15,9 +15,14 @@ import { useEffect, useState } from 'react';
 import { UseGetCartByClientIdHook } from '../../hooks/UseGetCartByClientIdHook';
 import styles from './Cart.module.css';
 
+interface ProductsValues {
+  [id: string]: number;
+}
+
 export const Cart = () => {
   const clientId = localStorage.getItem('clientId');
 
+  const [productsValues, setProductsValues] = useState<ProductsValues>({});
   const [enabledQuery, setEnabledQuery] = useState(false);
   const { cart, isCartLoading } = UseGetCartByClientIdHook(
     clientId ?? '',
@@ -29,6 +34,40 @@ export const Cart = () => {
       setEnabledQuery(true);
     }
   }, [clientId]);
+
+  useEffect(() => {
+    if (cart) {
+      cart.items.forEach((item) => {
+        setProductsValues((prev) => {
+          const copyState = { ...prev };
+
+          copyState[`${item.product.id}`] = 1;
+
+          return copyState;
+        });
+      });
+    }
+  }, [cart]);
+
+  const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setProductsValues((prev) => {
+      const copyState = { ...prev };
+
+      copyState[`${event.target.name}`] = Number.parseInt(event.target.value);
+
+      return copyState;
+    });
+  }
+
+  const getTotalValue = () => {
+    if (cart) {
+      return cart.items.reduce((acc, cur) => {
+        return acc + (cur.product.price * productsValues[`${cur.product.id}`]);
+      }, 0).toFixed(2)
+    }
+
+    return undefined;
+  }
 
   return (
     <Box className={styles.Cart}>
@@ -53,16 +92,17 @@ export const Cart = () => {
                     </TableCell>
 
                     <TableCell align="right">
-                      ${item.product.price.toFixed(2)}
+                      ${(item.product.price * productsValues[`${item.product.id}`]).toFixed(2)}
                     </TableCell>
 
                     <TableCell align="right">
                       <input
                         type="number"
-                        name="quantity"
+                        name={`${item.product.id}`}
                         id="quantity"
                         min="1"
-                        value="1"
+                        value={productsValues[`${item.product.id}`]}
+                        onChange={handleQuantityChange}
                       />
                     </TableCell>
 
@@ -76,12 +116,12 @@ export const Cart = () => {
                 <TableRow>
                   <TableCell />
                   <TableCell />
+                  <TableCell align="right">Total Value: ${getTotalValue()}</TableCell>
                   <TableCell align="right">
-                    Total Value: $2152.00
-                  </TableCell>
-                  <TableCell />
-                  <TableCell align='right'>
                     <Button variant="contained">Finish</Button>
+                  </TableCell>
+                  <TableCell align="right">
+                    <Button variant="contained" onClick={() => console.log(productsValues)}>Show state</Button>
                   </TableCell>
                 </TableRow>
               </TableBody>

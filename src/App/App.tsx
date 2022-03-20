@@ -2,6 +2,7 @@ import { Box } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
 import { Header } from '../components/Header/Header';
 import { AllProducts } from '../Pages/AllProducts/AllProducts';
+import { Cart } from '../Pages/Cart/Cart';
 import { Category } from '../Pages/Category/Category';
 import { Home } from '../Pages/Home/Home';
 import { Login } from '../Pages/Login/Login';
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </Box>
     </div>

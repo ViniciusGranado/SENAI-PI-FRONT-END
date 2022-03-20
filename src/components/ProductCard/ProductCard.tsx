@@ -34,7 +34,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({productName, productPri
         <Link to={`/product/${productId}`} className={styles['product-name']}>
           <Typography variant="body1">{productName}</Typography>
         </Link>
-        <Typography variant="h4">{`R$${productPrice.toFixed(2)}`}</Typography>
+        <Typography variant="h4">{`$${productPrice.toFixed(2)}`}</Typography>
       </CardContent>
       <CardActions disableSpacing sx={{display: 'flex', justifyContent: 'flex-end'}}>
         <Button startIcon={< AddShoppingCart />} variant='contained'>

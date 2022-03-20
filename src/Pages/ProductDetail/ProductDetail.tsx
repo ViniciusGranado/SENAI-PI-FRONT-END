@@ -45,7 +45,7 @@ export const ProductDetail = () => {
               </Typography>
 
               <Typography variant="body1" sx={{ fontSize: '4rem' }}>
-                R${product.price.toFixed(2)}
+                ${product.price.toFixed(2)}
               </Typography>
             </Box>
 

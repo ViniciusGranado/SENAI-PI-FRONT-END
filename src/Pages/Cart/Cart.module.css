@@ -1,0 +1,25 @@
+.Cart {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  margin: 3rem auto;
+}
+
+.Cart td,
+.Cart th {
+  font-size: 1.5rem;
+}
+
+.Cart img {
+  max-height: 4rem;
+}
+
+.Cart input {
+  max-width: 3rem;
+  height: 2rem;
+}
+
+.Cart button {
+  align-self: flex-end;
+}

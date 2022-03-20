@@ -35,4 +35,5 @@ export const storeApi = {
       method: 'POST',
       body: JSON.stringify(loginFormDTO),
     }),
+  getCartByClientId: (clientId: string) => request(`cart/${clientId}`),
 };

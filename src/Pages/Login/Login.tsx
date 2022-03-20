@@ -35,7 +35,7 @@ export const Login = () => {
   useEffect(() => {
     if (isQuerySuccess && userInfo) {
       localStorage.setItem('isAuthenticated', 'true');
-      localStorage.setItem('userId', `${userInfo.id}`);
+      localStorage.setItem('clientId', `${userInfo.id}`);
       localStorage.setItem('userRole', userInfo.role);
       navigate('/');
     }

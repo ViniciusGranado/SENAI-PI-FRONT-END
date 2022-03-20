@@ -7,11 +7,17 @@ export interface Product {
   categories: Category[];
 }
 
+export interface Cart {
+  id: number;
+  items: {product: Product}[];
+}
+
 export interface Category {
   id: number;
   name: string;
   reference: string;
 }
+
 export interface NewUserDTO {
   [name: string]: string;
   email: string;

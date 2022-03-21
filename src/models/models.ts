@@ -68,3 +68,8 @@ export interface ErrorObject {
   message: string;
   staack: string;
 }
+
+export interface NewCategoryDto {
+  [name: string] : string;
+  reference: string;
+}

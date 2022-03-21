@@ -3,6 +3,7 @@ import {
   LoginFormDTO,
   CartItemData,
   CreateOrderDto,
+  NewCategoryDto,
 } from '../models/models';
 
 const request = (
@@ -30,6 +31,11 @@ export const storeApi = {
     request(`products/category/${categoryReference}`),
   getAllFavorites: request('products/favorites'),
   getAllCategories: request('categories'),
+  insertCategory: (newCategoryDto: NewCategoryDto) =>
+    request('categories', {
+      method: 'POST',
+      body: JSON.stringify(newCategoryDto),
+    }),
   saveNewUser: (newUserDTO: NewUserDTO) =>
     request('users', {
       method: 'POST',

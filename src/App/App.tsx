@@ -1,6 +1,7 @@
 import { Box } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
 import { Header } from '../components/Header/Header';
+import { AdminPanel } from '../Pages/AdminPanel/AdminPanel';
 import { AllProducts } from '../Pages/AllProducts/AllProducts';
 import { Cart } from '../Pages/Cart/Cart';
 import { Category } from '../Pages/Category/Category';
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/order-summary/:id" element={<OrderSummary />} />
+          <Route path="/admin" element={<AdminPanel />} />
         </Routes>
       </Box>
     </div>

@@ -32,7 +32,7 @@ export const UseInsertNewCategoryHook = () => {
     isError: isCreateCategoryError,
   } = useMutation<Category>(storeApi.insertCategory(newCategoryDto), {
     onSuccess: () => {
-      queryClient.invalidateQueries('queryClient');
+      queryClient.invalidateQueries('categories');
     },
   });
 

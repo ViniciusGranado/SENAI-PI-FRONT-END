@@ -2,6 +2,7 @@ import { TabContext, TabPanel, TabList } from '@mui/lab';
 import { Box, Tab } from '@mui/material';
 import { useState } from 'react';
 import { NewCategoryTab } from './NewCategoryTab/NewCategoryTab';
+import { NewProductTab } from './NewProductTab/NewProductTab';
 
 export const AdminPanel = () => {
   const [value, setValue] = useState('1');
@@ -24,7 +25,9 @@ export const AdminPanel = () => {
           <NewCategoryTab />
         </TabPanel>
         
-        <TabPanel value="2">Item Two</TabPanel>
+        <TabPanel value="2">
+          <NewProductTab />
+        </TabPanel>
       </TabContext>
     </Box>
   );

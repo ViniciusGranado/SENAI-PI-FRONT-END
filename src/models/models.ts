@@ -73,3 +73,12 @@ export interface NewCategoryDto {
   [name: string] : string;
   reference: string;
 }
+
+export interface NewProductDto {
+  name: string;
+  description: string;
+  price: number,
+  imgUrl: string;
+  favorite: boolean,
+  categories: Category[]
+}

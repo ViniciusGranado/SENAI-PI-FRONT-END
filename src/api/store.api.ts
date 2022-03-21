@@ -4,6 +4,7 @@ import {
   CartItemData,
   CreateOrderDto,
   NewCategoryDto,
+  NewProductDto,
 } from '../models/models';
 
 const request = (
@@ -35,6 +36,11 @@ export const storeApi = {
     request('categories', {
       method: 'POST',
       body: JSON.stringify(newCategoryDto),
+    }),
+  insertProduct: (newProductDto: NewProductDto) =>
+    request('products', {
+      method: 'POST',
+      body: JSON.stringify(newProductDto),
     }),
   saveNewUser: (newUserDTO: NewUserDTO) =>
     request('users', {

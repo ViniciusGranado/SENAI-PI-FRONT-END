@@ -1,0 +1,20 @@
+.OrderSummary {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  margin: 3rem auto;
+}
+
+.OrderSummary td,
+.OrderSummary th {
+  font-size: 1.5rem;
+}
+
+.OrderSummary img {
+  max-height: 4rem;
+}
+
+.Cart button {
+  align-self: flex-end;
+}

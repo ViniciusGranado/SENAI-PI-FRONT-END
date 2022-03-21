@@ -6,6 +6,7 @@ import { Cart } from '../Pages/Cart/Cart';
 import { Category } from '../Pages/Category/Category';
 import { Home } from '../Pages/Home/Home';
 import { Login } from '../Pages/Login/Login';
+import { OrderSummary } from '../Pages/OrderSummary/OrderSummary';
 import { ProductDetail } from '../Pages/ProductDetail/ProductDetail';
 import { SignIn } from '../Pages/SignIn/SignIn';
 import styles from './App.module.css';
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/order-summary/:id" element={<OrderSummary />} />
         </Routes>
       </Box>
     </div>

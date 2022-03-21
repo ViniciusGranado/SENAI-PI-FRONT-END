@@ -53,4 +53,5 @@ export const storeApi = {
     }),
   createOrder: (createOrderDto: CreateOrderDto) =>
     request(`orders`, { method: 'POST', body: JSON.stringify(createOrderDto) }),
+  getOrderById: (id: string) => request(`orders/${id}`),
 };

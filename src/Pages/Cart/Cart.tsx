@@ -1,4 +1,5 @@
 import { Delete } from '@mui/icons-material';
+import { LoadingButton } from '@mui/lab';
 import {
   Box,
   CircularProgress,
@@ -9,12 +10,13 @@ import {
   TableCell,
   TableContainer,
   TableRow,
-  Button,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { UseGetCartByClientIdHook } from '../../hooks/UseGetCartByClientIdHook';
+import { useNavigate } from 'react-router-dom';
+import { UsesCreateOrderHook } from '../../hooks/UseCreateOrderHook';
 import { UseDeleteCartItemHook } from '../../hooks/UseDeleteCartItemHook';
-import { UsesCreateCartHook } from '../../hooks/UseCreateCartHook';
+import { UseGetCartByClientIdHook } from '../../hooks/UseGetCartByClientIdHook';
+import { CreateOrderDto, CreateOrderItem } from '../../models/models';
 import styles from './Cart.module.css';
 
 interface ProductsValues {
@@ -22,6 +24,7 @@ interface ProductsValues {
 }
 
 export const Cart = () => {
+  const navigate = useNavigate();
   const clientId = localStorage.getItem('clientId');
 
   const [productsValues, setProductsValues] = useState<ProductsValues>({});
@@ -32,9 +35,8 @@ export const Cart = () => {
   );
 
   const { deleteProduct, isDeleteProductLoading } = UseDeleteCartItemHook();
-  const { createCart, orderData, isCreateDatatLoading } = UsesCreateCartHook(
-    clientId ?? ''
-  );
+  const { createOrder, orderData, isCreateOrderLoading, isCreateOrderSuccess } =
+    UsesCreateOrderHook();
 
   useEffect(() => {
     if (clientId) {
@@ -55,6 +57,12 @@ export const Cart = () => {
       });
     }
   }, [cart]);
+
+  useEffect(() => {
+    if (isCreateOrderSuccess && orderData) {
+      navigate(`/order-summary/${orderData.id}`);
+    }
+  }, [isCreateOrderSuccess, navigate, orderData]);
 
   const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setProductsValues((prev) => {
@@ -88,7 +96,21 @@ export const Cart = () => {
   };
 
   const handleFinishOrder = () => {
-    createCart();
+    if (clientId && cart) {
+      const products: CreateOrderItem[] = cart.items.map((item) => {
+        return {
+          productId: item.product.id,
+          quantity: productsValues[`${item.product.id}`],
+        };
+      });
+
+      const createOrderDto: CreateOrderDto = {
+        clientId: Number.parseInt(clientId),
+        products: products,
+      };
+
+      createOrder(createOrderDto);
+    }
   };
 
   return (
@@ -161,9 +183,13 @@ export const Cart = () => {
                   </TableCell>
                   <TableCell />
                   <TableCell align="right">
-                    <Button variant="contained" onClick={handleFinishOrder}>
+                    <LoadingButton
+                      loading={isCreateOrderLoading}
+                      variant="contained"
+                      onClick={handleFinishOrder}
+                    >
                       Finish
-                    </Button>
+                    </LoadingButton>
                   </TableCell>
                 </TableRow>
               </TableBody>

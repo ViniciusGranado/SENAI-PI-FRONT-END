@@ -12,9 +12,27 @@ export interface Cart {
   items: {product: Product}[];
 }
 
+export interface CreateOrderItem {
+  productId: number;
+  quantity: number;
+}
+
+
+export interface CreateOrderDto {
+  clientId: number;
+  products: CreateOrderItem[]
+}
+
+export interface OrderItem {
+  quantity: number;
+  price: number;
+  product: Product;
+  subTotal: number;
+}
+
 export interface Order {
   id: number;
-  items: Product;
+  items: OrderItem[];
   total: number;
 }
 

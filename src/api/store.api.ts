@@ -1,4 +1,9 @@
-import { NewUserDTO, LoginFormDTO, CartItemData } from '../models/models';
+import {
+  NewUserDTO,
+  LoginFormDTO,
+  CartItemData,
+  CreateOrderDto,
+} from '../models/models';
 
 const request = (
   path: RequestInfo,
@@ -46,6 +51,6 @@ export const storeApi = {
       method: 'DELETE',
       body: JSON.stringify(cartItemData),
     }),
-  createCart: (clientId: string) =>
-    request(`orders/${clientId}`, { method: 'POST' }),
+  createOrder: (createOrderDto: CreateOrderDto) =>
+    request(`orders`, { method: 'POST', body: JSON.stringify(createOrderDto) }),
 };

@@ -72,7 +72,7 @@ export const NewProductTab = () => {
             setNewProductDto((prev) => {
               const stateCopy = { ...prev };
 
-              stateCopy.name = event.target.value.trim();
+              stateCopy.name = event.target.value;
 
               return stateCopy;
             })
@@ -88,7 +88,7 @@ export const NewProductTab = () => {
             setNewProductDto((prev) => {
               const stateCopy = { ...prev };
 
-              stateCopy.description = event.target.value.trim();
+              stateCopy.description = event.target.value;
 
               return stateCopy;
             })
@@ -105,7 +105,7 @@ export const NewProductTab = () => {
             setNewProductDto((prev) => {
               const stateCopy = { ...prev };
 
-              stateCopy.price = Number.parseFloat(event.target.value.trim());
+              stateCopy.price = Number.parseFloat(event.target.value);
 
               return stateCopy;
             })
@@ -121,7 +121,7 @@ export const NewProductTab = () => {
             setNewProductDto((prev) => {
               const stateCopy = { ...prev };
 
-              stateCopy.imgUrl = event.target.value.trim();
+              stateCopy.imgUrl = event.target.value;
 
               return stateCopy;
             })

@@ -19,7 +19,7 @@ export const UseInsertNewCategoryHook = () => {
     setNewCategoryDto((prev) => {
       const stateCopy = { ...prev };
 
-      stateCopy[event.target.name] = event.target.value.trim();
+      stateCopy[event.target.name] = event.target.value;
 
       return stateCopy;
     });

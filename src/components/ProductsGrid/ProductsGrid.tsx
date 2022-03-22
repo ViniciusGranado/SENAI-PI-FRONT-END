@@ -47,5 +47,5 @@ export const ProductsGrid: React.FC<ProductsGridProps> = ({
     );
   };
 
-  return <>{getContent()};</>;
+  return <>{getContent()}</>;
 };

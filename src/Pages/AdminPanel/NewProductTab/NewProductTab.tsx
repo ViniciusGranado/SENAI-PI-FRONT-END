@@ -9,9 +9,11 @@ import {
   FormGroup,
   FormLabel,
   TextField,
-  Typography,
+  Typography
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import {
+  ChangeEvent, useEffect, useState
+} from 'react';
 import { AlertDialog } from '../../../components/AlertDialog/AlertDialog';
 import { useGetAllCategoriesHook } from '../../../hooks/UseGetAllCategoriesHook';
 import { UseInsertNewProductHook } from '../../../hooks/UseInsertNewProductHook';
@@ -32,7 +34,7 @@ export const NewProductTab = () => {
     isCreateProductLoading,
     isCreateProductError,
     newProductDto,
-    handleFormValues,
+    setNewProductDto,
   } = UseInsertNewProductHook();
 
   useEffect(() => {
@@ -66,35 +68,80 @@ export const NewProductTab = () => {
           label="Product Name"
           name="name"
           fullWidth
-          onChange={handleFormValues}
+          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+            setNewProductDto((prev) => {
+              const stateCopy = { ...prev };
+
+              stateCopy.name = event.target.value.trim();
+
+              return stateCopy;
+            })
+          }
+          value={newProductDto.name}
         />
 
         <TextField
           label="Product Description"
           name="description"
           fullWidth
-          onChange={handleFormValues}
+          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+            setNewProductDto((prev) => {
+              const stateCopy = { ...prev };
+
+              stateCopy.description = event.target.value.trim();
+
+              return stateCopy;
+            })
+          }
+          value={newProductDto.description}
         />
 
         <TextField
           label="Product Price"
           name="price"
           fullWidth
-          onChange={handleFormValues}
           type="number"
+          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+            setNewProductDto((prev) => {
+              const stateCopy = { ...prev };
+
+              stateCopy.price = Number.parseFloat(event.target.value.trim());
+
+              return stateCopy;
+            })
+          }
+          value={newProductDto.price}
         />
 
         <TextField
           label="Image URL"
           name="imgUrl"
           fullWidth
-          onChange={handleFormValues}
+          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+            setNewProductDto((prev) => {
+              const stateCopy = { ...prev };
+
+              stateCopy.imgUrl = event.target.value.trim();
+
+              return stateCopy;
+            })
+          }
+          value={newProductDto.imgUrl}
         />
 
         <FormControlLabel
           control={<Checkbox />}
           label="Is Favorite"
           name="favorite"
+          onChange={(_: any, checked: boolean) =>
+            setNewProductDto((prev) => {
+              const stateCopy = { ...prev };
+
+              stateCopy.favorite = checked;
+
+              return stateCopy;
+            })
+          }
         />
 
         <FormControl component="fieldset">
@@ -106,6 +153,22 @@ export const NewProductTab = () => {
                   control={<Checkbox name={category.reference} />}
                   label={category.name}
                   key={category.id}
+                  onChange={(_: any, checked: boolean) => {
+                    setNewProductDto((prev) => {
+                      const stateCopy = { ...prev };
+
+                      if (checked) {
+                        stateCopy.categories.push(category);
+                      } else {
+                        stateCopy.categories = stateCopy.categories.filter(
+                          (item) => item !== category
+                        );
+                      }
+
+                      return stateCopy;
+                    });
+                  }}
+                  value={newProductDto.categories.includes(category)}
                 />
               );
             })}
@@ -132,18 +195,19 @@ export const NewProductTab = () => {
 
   const getContent = () => {
     if (isCategoriesLoading) {
-      return <CircularProgress />
+      return <CircularProgress />;
     }
 
     if (!categories?.length) {
-      return <Typography>There are no listed categories. Please register a category before entering a product</Typography>
+      return (
+        <Typography>
+          There are no listed categories. Please register a category before
+          entering a product
+        </Typography>
+      );
     }
 
     return getForm();
-  }
-  return (
-    <Box className={styles.NewProductTab}>
-      {getContent()}
-    </Box>
-  );
+  };
+  return <Box className={styles.NewProductTab}>{getContent()}</Box>;
 };

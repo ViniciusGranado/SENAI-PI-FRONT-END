@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { useMutation 
-} from 'react-query';
+import { useMutation } from 'react-query';
 import { storeApi } from '../api/store.api';
 import { Product, NewProductDto } from '../models/models';
 
@@ -16,12 +15,6 @@ const initialNewProductDto: NewProductDto = {
 export const UseInsertNewProductHook = () => {
   const [newProductDto, setNewProductDto] = useState(initialNewProductDto);
 
-  const handleFormValues = (
-    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => {
-    console.log('change');
-  };
-
   const {
     mutate: createProduct,
     isSuccess: isCreateProductSuccess,
@@ -34,7 +27,7 @@ export const UseInsertNewProductHook = () => {
     isCreateProductSuccess,
     isCreateProductLoading,
     isCreateProductError,
-    handleFormValues,
+    setNewProductDto,
     newProductDto,
   };
 };

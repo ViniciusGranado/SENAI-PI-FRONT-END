@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { NewCategoryTab } from './NewCategoryTab/NewCategoryTab';
 import { NewProductTab } from './NewProductTab/NewProductTab';
 
+// TODO Redirect to 'not authorized' page when user 
+// access this page through URL
 export const AdminPanel = () => {
   const [value, setValue] = useState('1');
 

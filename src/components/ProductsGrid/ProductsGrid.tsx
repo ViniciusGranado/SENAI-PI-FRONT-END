@@ -25,7 +25,7 @@ export const ProductsGrid: React.FC<ProductsGridProps> = ({
       );
     }
 
-    if (products === undefined || clientId === null) {
+    if (products === undefined) {
       return <Typography>Error while loading</Typography>;
     }
 
@@ -39,7 +39,7 @@ export const ProductsGrid: React.FC<ProductsGridProps> = ({
               imageUrl={product.imgUrl}
               productId={product.id}
               key={product.id}
-              clientId={Number.parseInt(clientId)}
+              clientId={clientId} 
             />
           );
         })}

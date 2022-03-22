@@ -18,7 +18,7 @@ interface ProductCardProps {
   productPrice: number;
   imageUrl: string;
   productId: number;
-  clientId: number;
+  clientId: string | null;
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({
@@ -38,7 +38,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   }, [isInsertProductSuccess, navigate]);
 
   const onAddToCart = () => {
-    insertProduct({ clientId, productId });
+    if (clientId) {
+      insertProduct({ clientId: Number.parseInt(clientId), productId: productId });
+    } else {
+      navigate('/login');
+    }
   };
 
   return (

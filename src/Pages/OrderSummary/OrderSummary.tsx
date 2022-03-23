@@ -1,27 +1,24 @@
-import { Delete } from '@mui/icons-material';
 import {
   CircularProgress,
-  IconButton,
   Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
-  TableRow,
+  TableRow
 } from '@mui/material';
 import { Box } from '@mui/system';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { UseGetOrderById } from '../../hooks/UseGetOrderById';
-
+import { useGetOrderById } from '../../hooks/useGetOrderById';
 import styles from './OrderSummary.module.css';
 
 export const OrderSummary = () => {
   const { id: orderId } = useParams();
   const [enabledQuery, setEnabledQuery] = useState(false);
 
-  const { order, isOrderLoading } = UseGetOrderById(
+  const { order, isOrderLoading } = useGetOrderById(
     orderId ?? '',
     enabledQuery
   );
@@ -29,8 +26,8 @@ export const OrderSummary = () => {
   useEffect(() => {
     if (orderId) {
       setEnabledQuery(true);
-    } 
-  }, [orderId])
+    }
+  }, [orderId]);
 
   return (
     <Box className={styles.OrderSummary}>
@@ -41,7 +38,9 @@ export const OrderSummary = () => {
           <Table sx={{ minWidth: 650 }}>
             <TableHead>
               <TableRow>
-                <TableCell align="right" colSpan={2}>Product</TableCell>
+                <TableCell align="right" colSpan={2}>
+                  Product
+                </TableCell>
                 <TableCell align="right">Value</TableCell>
                 <TableCell align="right">Quantity</TableCell>
               </TableRow>
@@ -57,7 +56,7 @@ export const OrderSummary = () => {
                     <img src={item.product.imgUrl} alt={item.product.name} />
                   </TableCell>
 
-                  <TableCell  align="right" component="th" scope="row">
+                  <TableCell align="right" component="th" scope="row">
                     {item.product.name}
                   </TableCell>
 

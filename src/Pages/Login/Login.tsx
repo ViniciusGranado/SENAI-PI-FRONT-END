@@ -1,9 +1,8 @@
-import { Box, TextField, Button, CircularProgress } from '@mui/material';
+import { Box, Button, CircularProgress, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { UseAuthenticateUserHook } from '../../hooks/UseAuthenticateUserHook';
-import { AlertDialog } from '../../components/AlertDialog/AlertDialog';
 import { useNavigate } from 'react-router-dom';
-
+import { AlertDialog } from '../../components/AlertDialog/AlertDialog';
+import { useAuthenticateUserHook } from '../../hooks/useAuthenticateUserHook';
 import styles from './Login.module.css';
 
 export const Login = () => {
@@ -16,7 +15,7 @@ export const Login = () => {
     isQueryError,
     errorStatus,
     loginFormDTO,
-  } = UseAuthenticateUserHook();
+  } = useAuthenticateUserHook();
 
   const navigate = useNavigate();
 

@@ -1,11 +1,11 @@
 import { AddShoppingCart } from '@mui/icons-material';
-import { CircularProgress, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import { CircularProgress, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { UseGetProductById } from '../../hooks/UseGetProductById';
-import { UseInsertCartItemHook } from '../../hooks/UseInsertCartItemHook';
+import { useGetProductById } from '../../hooks/useGetProductById';
+import { useInsertCartItemHook } from '../../hooks/useInsertCartItemHook';
 import styles from './ProductDetail.module.css';
 
 export const ProductDetail = () => {
@@ -14,11 +14,12 @@ export const ProductDetail = () => {
   const id = useParams();
   const navigate = useNavigate();
 
-  const { insertProduct, isInsertProductSuccess, isInsertProductLoading } = UseInsertCartItemHook();
+  const { insertProduct, isInsertProductSuccess, isInsertProductLoading } =
+    useInsertCartItemHook();
 
   const [enabledQuery, setEnabledQuery] = useState(false);
 
-  const { product, isProductLoading } = UseGetProductById(
+  const { product, isProductLoading } = useGetProductById(
     productId ?? '',
     enabledQuery
   );

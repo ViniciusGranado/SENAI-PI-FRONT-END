@@ -10,15 +10,15 @@ const initialNewUserDTO: NewUserDTO = {
   password: '',
 };
 
-export const UseSaveNewUserHook = () => {
-  const [newUserDTO, setNewUserDTO ] = useState(initialNewUserDTO);
+export const useSaveNewUserHook = () => {
+  const [newUserDTO, setNewUserDTO] = useState(initialNewUserDTO);
 
-  const { 
+  const {
     mutate: saveNewUser,
     isLoading: isSaveLoading,
     isSuccess: isSaveSuccess,
     isError: isSaveError,
-   } = useMutation(storeApi.saveNewUser(newUserDTO));
+  } = useMutation(storeApi.saveNewUser(newUserDTO));
 
   const handleFormValues = (
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -32,12 +32,11 @@ export const UseSaveNewUserHook = () => {
     });
   };
 
-  
   return {
     saveNewUser,
     handleFormValues,
     isSaveLoading,
     isSaveSuccess,
     isSaveError,
-  }
+  };
 };

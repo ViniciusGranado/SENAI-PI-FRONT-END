@@ -15,7 +15,7 @@ const createOrderQuery = async (createOrderDto: CreateOrderDto) => {
   return response.json();
 };
 
-export const UsesCreateOrderHook = () => {
+export const useCreateOrderHook = () => {
   const {
     mutate: createOrder,
     data: orderData,

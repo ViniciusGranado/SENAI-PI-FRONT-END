@@ -13,9 +13,9 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UsesCreateOrderHook } from '../../hooks/UseCreateOrderHook';
-import { UseDeleteCartItemHook } from '../../hooks/UseDeleteCartItemHook';
-import { UseGetCartByClientIdHook } from '../../hooks/UseGetCartByClientIdHook';
+import { useCreateOrderHook } from '../../hooks/useCreateOrderHook';
+import { useDeleteCartItemHook } from '../../hooks/useDeleteCartItemHook';
+import { useGetCartByClientIdHook } from '../../hooks/useGetCartByClientIdHook';
 import { CreateOrderDto, CreateOrderItem } from '../../models/models';
 import styles from './Cart.module.css';
 
@@ -29,14 +29,14 @@ export const Cart = () => {
 
   const [productsValues, setProductsValues] = useState<ProductsValues>({});
   const [enabledQuery, setEnabledQuery] = useState(false);
-  const { cart, isCartLoading } = UseGetCartByClientIdHook(
+  const { cart, isCartLoading } = useGetCartByClientIdHook(
     clientId ?? '',
     enabledQuery
   );
 
-  const { deleteProduct, isDeleteProductLoading } = UseDeleteCartItemHook();
+  const { deleteProduct, isDeleteProductLoading } = useDeleteCartItemHook();
   const { createOrder, orderData, isCreateOrderLoading, isCreateOrderSuccess } =
-    UsesCreateOrderHook();
+    useCreateOrderHook();
 
   useEffect(() => {
     if (clientId) {

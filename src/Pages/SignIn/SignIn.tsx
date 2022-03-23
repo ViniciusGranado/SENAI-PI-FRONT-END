@@ -3,12 +3,12 @@ import {
   Box,
   Button,
   CircularProgress,
-  TextField,
+  TextField
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AlertDialog } from '../../components/AlertDialog/AlertDialog';
-import { UseSaveNewUserHook } from '../../hooks/UseSaveNewUserHook';
+import { useSaveNewUserHook } from '../../hooks/useSaveNewUserHook';
 import styles from './SignIn.module.css';
 
 export const SignIn = () => {
@@ -18,7 +18,7 @@ export const SignIn = () => {
     isSaveLoading,
     isSaveSuccess,
     isSaveError,
-  } = UseSaveNewUserHook();
+  } = useSaveNewUserHook();
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [alertSeverity, setAlertSeverity] = useState<AlertColor | undefined>(
     undefined

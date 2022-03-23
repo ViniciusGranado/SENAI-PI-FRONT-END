@@ -15,7 +15,7 @@ const insertCartItem = async (cartItemData: CartItemData) => {
   return response.json();
 };
 
-export const UseInsertCartItemHook = () => {
+export const useInsertCartItemHook = () => {
   const {
     mutate: insertProduct,
     isSuccess: isInsertProductSuccess,

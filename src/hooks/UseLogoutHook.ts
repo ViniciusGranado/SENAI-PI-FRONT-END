@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-export const UseLogoutHook = () => {
+export const useLogoutHook = () => {
   const navigate = useNavigate();
 
   const logout = () => {
@@ -8,9 +8,9 @@ export const UseLogoutHook = () => {
     localStorage.removeItem('userRole');
 
     navigate('/');
-  }
+  };
 
   return {
     logout,
-  }
-}
+  };
+};

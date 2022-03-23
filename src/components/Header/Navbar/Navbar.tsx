@@ -1,11 +1,11 @@
 import { Box, Tab, Tabs } from '@mui/material';
 import { SyntheticEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useGetAllCategoriesHook } from '../../../hooks/UseGetAllCategoriesHook';
+import { useGetAllCategoriesHook } from '../../../hooks/useGetAllCategoriesHook';
 import styles from './Navbar.module.css';
 
 export const Navbar = () => {
-  const userRole = localStorage.getItem('userRole')
+  const userRole = localStorage.getItem('userRole');
   const { categories, isCategoriesLoading } = useGetAllCategoriesHook();
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
   const navigate = useNavigate();
@@ -31,10 +31,22 @@ export const Navbar = () => {
       });
 
       tabs.unshift(<Tab label="Home" key="0" onClick={() => navigate('/')} />);
-      tabs.push(<Tab label="All Products" key={tabs.length} onClick={() => navigate('/all-products')} />);
+      tabs.push(
+        <Tab
+          label="All Products"
+          key={tabs.length}
+          onClick={() => navigate('/all-products')}
+        />
+      );
 
-      if (userRole === "ADMIN") {
-        tabs.push(<Tab label="Admin Panel" key={tabs.length + 1} onClick={() => navigate('/admin')} />);
+      if (userRole === 'ADMIN') {
+        tabs.push(
+          <Tab
+            label="Admin Panel"
+            key={tabs.length + 1}
+            onClick={() => navigate('/admin')}
+          />
+        );
       }
 
       return tabs;

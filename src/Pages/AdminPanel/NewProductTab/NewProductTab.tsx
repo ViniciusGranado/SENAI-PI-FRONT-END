@@ -11,12 +11,10 @@ import {
   TextField,
   Typography
 } from '@mui/material';
-import {
-  ChangeEvent, useEffect, useState
-} from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { AlertDialog } from '../../../components/AlertDialog/AlertDialog';
-import { useGetAllCategoriesHook } from '../../../hooks/UseGetAllCategoriesHook';
-import { UseInsertNewProductHook } from '../../../hooks/UseInsertNewProductHook';
+import { useGetAllCategoriesHook } from '../../../hooks/useGetAllCategoriesHook';
+import { useInsertNewProductHook } from '../../../hooks/useInsertNewProductHook';
 import styles from './NewProductTab.module.css';
 
 export const NewProductTab = () => {
@@ -35,7 +33,7 @@ export const NewProductTab = () => {
     isCreateProductError,
     newProductDto,
     setNewProductDto,
-  } = UseInsertNewProductHook();
+  } = useInsertNewProductHook();
 
   useEffect(() => {
     if (isCreateProductSuccess) {

@@ -8,7 +8,7 @@ const initialNewCategoryDto: NewCategoryDto = {
   reference: '',
 };
 
-export const UseInsertNewCategoryHook = () => {
+export const useInsertNewCategoryHook = () => {
   const queryClient = useQueryClient();
 
   const [newCategoryDto, setNewCategoryDto] = useState(initialNewCategoryDto);

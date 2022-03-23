@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import { ProductsGrid } from '../../components/ProductsGrid/ProductsGrid';
-import { useGetAllProductsHook } from '../../hooks/UseGetAllProductsHook';
+import { useGetAllProductsHook } from '../../hooks/useGetAllProductsHook';
 import styles from './AllProducts.module.css';
 
 export const AllProducts = () => {
@@ -9,7 +9,10 @@ export const AllProducts = () => {
   return (
     <Box className={styles.AllProducts}>
       <Box className={styles.content}>
-        <ProductsGrid isProductsLoading={isProductsLoading} products={products} />
+        <ProductsGrid
+          isProductsLoading={isProductsLoading}
+          products={products}
+        />
       </Box>
     </Box>
   );

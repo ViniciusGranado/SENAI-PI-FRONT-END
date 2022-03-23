@@ -8,7 +8,7 @@ const initialLoginFormDTO: LoginFormDTO = {
   password: '',
 };
 
-export const UseAuthenticateUserHook = () => {
+export const useAuthenticateUserHook = () => {
   const [loginFormDTO, setLoginFormDTO ] = useState(initialLoginFormDTO);
 
   const { 

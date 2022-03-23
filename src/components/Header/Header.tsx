@@ -1,14 +1,14 @@
 import { ShoppingCart } from '@mui/icons-material';
 import { Box, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useLogoutHook } from '../../hooks/useLogoutHook';
 import { LogoHorizontal } from '../LogoHorizontal/LogoHorizontal';
 import styles from './Header.module.css';
 import { Navbar } from './Navbar/Navbar';
-import { UseLogoutHook } from '../../hooks/UseLogoutHook';
 
 export const Header = () => {
   const navigate = useNavigate();
-  const { logout } = UseLogoutHook();
+  const { logout } = useLogoutHook();
 
   const isUserAuthenticated =
     localStorage.getItem('isAuthenticated') === 'true';

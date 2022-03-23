@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 import { storeApi } from '../api/store.api';
-import { Product, NewProductDto } from '../models/models';
+import { NewProductDto, Product } from '../models/models';
 
 const initialNewProductDto: NewProductDto = {
   name: '',
@@ -9,10 +9,10 @@ const initialNewProductDto: NewProductDto = {
   price: 0,
   imgUrl: '',
   favorite: false,
-  categories: []
-}
+  categories: [],
+};
 
-export const UseInsertNewProductHook = () => {
+export const useInsertNewProductHook = () => {
   const [newProductDto, setNewProductDto] = useState(initialNewProductDto);
 
   const {

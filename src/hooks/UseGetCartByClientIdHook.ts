@@ -3,7 +3,7 @@ import { storeApi } from '../api/store.api';
 import { Cart} from '../models/models';
 
 
-export const UseGetCartByClientIdHook = (clientId: string, enabled: boolean) => {
+export const useGetCartByClientIdHook = (clientId: string, enabled: boolean) => {
   const { 
     data: cart,
     isLoading: isCartLoading,

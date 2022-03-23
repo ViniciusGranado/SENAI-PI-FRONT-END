@@ -2,7 +2,7 @@ import { LoadingButton } from '@mui/lab';
 import { AlertColor, Box, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { AlertDialog } from '../../../components/AlertDialog/AlertDialog';
-import { UseInsertNewCategoryHook } from '../../../hooks/UseInsertNewCategoryHook';
+import { useInsertNewCategoryHook } from '../../../hooks/useInsertNewCategoryHook';
 import styles from './NewCategoryTab.module.css';
 
 export const NewCategoryTab = () => {
@@ -19,7 +19,7 @@ export const NewCategoryTab = () => {
     isCreateCategoryError,
     newCategoryDto,
     handleFormValues,
-  } = UseInsertNewCategoryHook();
+  } = useInsertNewCategoryHook();
 
   useEffect(() => {
     if (isCreateCategorySuccess) {

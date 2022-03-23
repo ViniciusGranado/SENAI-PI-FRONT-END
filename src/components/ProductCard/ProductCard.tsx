@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { UseInsertCartItemHook } from '../../hooks/UseInsertCartItemHook';
+import { useInsertCartItemHook } from '../../hooks/useInsertCartItemHook';
 import styles from './ProductCard.module.css';
 
 interface ProductCardProps {
@@ -28,7 +28,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   productId,
   clientId,
 }) => {
-  const { insertProduct, isInsertProductSuccess, isInsertProductLoading } = UseInsertCartItemHook();
+  const { insertProduct, isInsertProductSuccess, isInsertProductLoading } =
+    useInsertCartItemHook();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -39,7 +40,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   const onAddToCart = () => {
     if (clientId) {
-      insertProduct({ clientId: Number.parseInt(clientId), productId: productId });
+      insertProduct({
+        clientId: Number.parseInt(clientId),
+        productId: productId,
+      });
     } else {
       navigate('/login');
     }

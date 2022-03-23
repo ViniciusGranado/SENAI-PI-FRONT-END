@@ -6,6 +6,7 @@ export const useLogoutHook = () => {
   const logout = () => {
     localStorage.removeItem('isAuthenticated');
     localStorage.removeItem('userRole');
+    localStorage.removeItem('clientId');
 
     navigate('/');
   };
